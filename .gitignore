@@ -1,0 +1,9 @@
+.venv/
+.idea/
+mlruns/
+model_export/
+*.safetensors
+
+# DVC files
+/dvc.lock
+.env
