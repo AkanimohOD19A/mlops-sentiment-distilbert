@@ -31,11 +31,10 @@ def mock_predictor():
         outputs.logits = logits
         mock_model.return_value = outputs
 
-        # Configure the tokenizer to return the expected input format
-        mock_tokenizer.return_value = {
-            "input_ids": torch.tensor([[1, 2, 3]]),
-            "attention_mask": torch.tensor([[1, 1, 1]])
-        }
+        # Configure the tokenizer to return a MagicMock with a to() method
+        tokenizer_return = MagicMock()
+        tokenizer_return.to = MagicMock(return_value=tokenizer_return)  # Make to() return self
+        mock_tokenizer.return_value = tokenizer_return
 
         # Create the predictor with mocked HF model ID
         predictor = EmotionPredictor(model_id="test/emotion-model")
