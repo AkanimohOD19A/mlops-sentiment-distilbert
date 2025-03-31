@@ -31,10 +31,10 @@ def mock_predictor():
         outputs.logits = logits
         mock_model.return_value = outputs
 
-        # Configure the tokenizer to return a MagicMock with a to() method
-        tokenizer_return = MagicMock()
-        tokenizer_return.to = MagicMock(return_value=tokenizer_return)  # Make to() return self
-        mock_tokenizer.return_value = tokenizer_return
+        # Create a tensor-like object with to() method for tokenizer output
+        tokenizer_output = MagicMock()
+        tokenizer_output.to = MagicMock(return_value=tokenizer_output)
+        mock_tokenizer.return_value = tokenizer_output
 
         # Create the predictor with mocked HF model ID
         predictor = EmotionPredictor(model_id="test/emotion-model")
@@ -44,6 +44,7 @@ def mock_predictor():
         predictor.tokenizer = mock_tokenizer
         predictor.id2label = {0: "happy", 1: "sad", 2: "angry"}
         predictor.label2id = {"happy": 0, "sad": 1, "angry": 2}
+        predictor.device = "cpu"  # Ensure we use CPU for tests
 
         return predictor
 
@@ -61,8 +62,8 @@ def test_get_labels(mock_predictor):
     assert set(labels) == {"happy", "sad", "angry"}
 
     # Test exception when model not loaded
-    mock_predictor.label2id = None
-    with pytest.raises(ValueError):
+    mock_predictor.model = None  # This will make is_model_loaded() return False
+    with pytest.raises(ValueError, match="Model is not loaded"):
         mock_predictor.get_labels()
 
 
