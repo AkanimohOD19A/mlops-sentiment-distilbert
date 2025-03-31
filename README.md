@@ -82,3 +82,7 @@ emotion-classifier/
 ├── README.md               # This file
 └── requirements.txt        # Python dependencies
 ```
+
+### NOTES
+-> sOFTMAX Calc. `[0.1, 0.2, 0.7]`
+The softmax calculation takes exponentials of each value and then normalizes them to sum to 1. When the differences between values are small, the probabilities are more evenly distributed.

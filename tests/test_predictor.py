@@ -71,7 +71,7 @@ def test_predict(mock_predictor):
     """Test the prediction functionality"""
     # Configure the model to return specific logits
     mock_outputs = MagicMock()
-    mock_outputs.logits = torch.tensor([[0.1, 0.2, 0.7]])  # Highest probability for "angry"
+    mock_outputs.logits = torch.tensor([[0.1, 0.2, 2.0]])  # Highest probability for "angry"
     mock_predictor.model.return_value = mock_outputs
 
     # Reset the necessary attributes
