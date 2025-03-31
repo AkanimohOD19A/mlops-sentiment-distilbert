@@ -78,4 +78,4 @@ jobs:
           -H "Authorization: Bearer $RENDER_API_KEY" \
           -H "Content-Type: application/json"
         
-        echo "Deployed to demo environment at: https://your-app-name.onrender.com"
+        echo "Deployed to demo environment at: https://mlops-sentiment-distilbert.onrender.com"
