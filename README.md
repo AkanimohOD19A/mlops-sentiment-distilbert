@@ -146,7 +146,8 @@ emotion-classifier/
 - **Monitoring**: Basic metrics via Render dashboard
 - **Security**: API secret key authentication (optional)
 
-## Diagram
+## Flowchart
+### Training to Deployment
 ```mermaid
 flowchart LR
     subgraph Training
@@ -165,4 +166,66 @@ flowchart LR
     
     style Training fill:#e6f7ff,stroke:#1890ff
     style Deployment fill:#f6ffed,stroke:#52c41a
+```
+
+### CI/CD Workflow
+```mermaid
+flowchart TD
+    A1[GitHub Push] -->|Trigger| B1[GitHub Actions]
+    
+    subgraph CI
+        B1 -->|Install Requirements| C1[Setup Environment]
+        C1 -->|Run Tests| D1[Test Suite]
+        D1 -->|Code Quality| E1[Flake8 Checks]
+    end
+    
+    subgraph CD
+        E1 -->|If Tests Pass| F1[Build Docker Image]
+        F1 -->|Docker Login| G1[Push to Docker Hub]
+        G1 -->|Deployment Trigger| H1[Deploy to Render]
+        H1 -->|Health Check| I1[Verify Deployment]
+    end
+    
+    style CI fill:#f9f0ff,stroke:#722ed1
+    style CD fill:#fff2e8,stroke:#fa541c
+```
+
+### Model Serving
+```mermaid
+flowchart LR
+    A2[Client] -->|HTTP Request| B2[Load Balancer]
+    B2 -->|Route Request| C2[FastAPI Service]
+    
+    subgraph API
+        C2 -->|Validation| D2[Input Processing]
+        D2 -->|Model Inference| E2[DistilBERT Model]
+        E2 -->|Post-Processing| F2[Format Response]
+    end
+    
+    F2 -->|HTTP Response| A2
+    
+    style API fill:#e6fffb,stroke:#13c2c2
+```
+
+### Monitoring (wandb/mlflow)*
+```mermaid
+flowchart TD
+    A3[Inference Requests] -->|Logging| B3[Request Logs]
+    A3 -->|Metrics Collection| C3[Performance Metrics]
+    A3 -->|Error Tracking| D3[Error Logs]
+    
+    subgraph Monitoring
+        B3 -->|Log Analysis| E3[Request Patterns]
+        C3 -->|Dashboards| F3[Performance Visualization]
+        D3 -->|Alerts| G3[Error Notifications]
+    end
+    
+    subgraph Observability
+        E3 --> H3[Model Drift Detection]
+        F3 --> I3[SLA Monitoring]
+        G3 --> J3[Incident Response]
+    end
+    
+    style Monitoring fill:#fff1f0,stroke:#f5222d
+    style Observability fill:#fcffe6,stroke:#a0d911
 ```
