@@ -145,3 +145,24 @@ emotion-classifier/
 - **Inference Optimization**: Batched inference, model quantization
 - **Monitoring**: Basic metrics via Render dashboard
 - **Security**: API secret key authentication (optional)
+
+## Diagram
+```mermaid
+flowchart LR
+    subgraph Training
+        A[Raw Text Data] -->|Preprocessing| B[Processed Dataset]
+        B -->|Fine-tuning| C[Base DistilBERT]
+        C -->|Training| D[Fine-tuned Model]
+        D -->|Evaluation| E[Validated Model]
+    end
+    
+    subgraph Deployment
+        E -->|Model Upload| F[Hugging Face Hub]
+        F -->|Model Registry| G[Model Serving API]
+        G -->|Container| H[Docker Image]
+        H -->|Hosting| I[Render Service]
+    end
+    
+    style Training fill:#e6f7ff,stroke:#1890ff
+    style Deployment fill:#f6ffed,stroke:#52c41a
+```
