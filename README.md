@@ -229,3 +229,38 @@ flowchart TD
     style Monitoring fill:#fff1f0,stroke:#f5222d
     style Observability fill:#fcffe6,stroke:#a0d911
 ```
+
+Try it!
+https://classifier-cohere.streamlit.app/
+
+---
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📝 License
+
+MIT License - free for personal and commercial use.
+
+---
+
+## 🆘 Support
+
+If you encounter issues:
+
+1. Check the troubleshooting section above
+2. Verify all dependencies are installed
+3. Ensure your API key is valid
+4. Check the terminal/console for error messages
+
+For additional help, please create an issue in the repository with:
+- Error message (full traceback)
+- Python version
+- Operating system
+- Steps to reproduce
+
+*Built with ❤️ by the [AfroLogicInsect](https://akandaniel.netlify.app/) *
